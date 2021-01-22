@@ -1,14 +1,14 @@
 
 <?php
 
-if (isset($_GET['sid']) &&
-    $_GET['sid'] === $sid &&
-    isset($_GET['username']) &&
-    isset($_GET['password']) &&
-    $_GET['username'] == "cemeris" &&
-    $_GET['password'] == "123"
+if (isset($_REQUEST['sid']) &&
+    $_REQUEST['sid'] === $sid &&
+    isset($_REQUEST['username']) &&
+    isset($_REQUEST['password']) &&
+    $_REQUEST['username'] == "cemeris" &&
+    $_REQUEST['password'] == "123"
 ) {
-    $_SESSION['username'] = $_GET['username'];
-    $_SESSION['password'] = $_GET['password'];
+    $_SESSION['username'] = $_REQUEST['username'];
+    $_SESSION['password'] = $_REQUEST['password'];
     header("Location: index.php");
 }
