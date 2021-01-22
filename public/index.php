@@ -19,13 +19,8 @@ if (isset($_SESSION['username'], $_SESSION['password']) &&
         $page_name = "todo";
     }
 }
-elseif (isset($_GET['sid']) && $_GET['sid'] === $sid) {
-    if(isset($_GET['username']) && isset($_GET['password'])) {
-        include "../bootcamp_app/actions/authenticate.php";
-    }
-    else {
-        $page_name = "page404";
-    }
+elseif (isset($_GET['page']) && $_GET['page'] === "autheticate") {
+    include "../bootcamp_app/actions/authenticate.php";
 }
 else {
     //$page_name = "access_denied";
