@@ -12,7 +12,7 @@ function get_url($path = "") {
 $sid = "000";
 
 session_start();
-$page_name = 'login';
+$page_name = 'access_denied';
 
 if (isset($_SESSION['username'], $_SESSION['password']) &&
     $_SESSION['username'] === 'cemeris' &&
@@ -37,6 +37,15 @@ elseif (isset($_GET['page']) && $_GET['page'] === "authenticate") {
     include "../bootcamp_app/actions/authenticate.php";
 }
 else {
+    if (isset($_GET['page'])) {
+        if ($_GET['page'] === "login") {
+            $page_name = "login";
+        }
+    }
+    else {
+        header("Location: index.php?page=login");
+    }
+
     //$page_name = "access_denied";
 }
 
