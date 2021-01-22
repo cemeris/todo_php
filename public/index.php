@@ -3,6 +3,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+const BASE_URL = "http://localhost/webbootcamp/public/";
+
+function get_url($path = "") {
+    echo BASE_URL . $path;
+}
+
 $sid = "000";
 
 session_start();
