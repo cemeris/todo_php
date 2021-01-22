@@ -1,4 +1,3 @@
-
 <?php
 
 if (isset($_REQUEST['sid']) &&
@@ -10,5 +9,8 @@ if (isset($_REQUEST['sid']) &&
 ) {
     $_SESSION['username'] = $_REQUEST['username'];
     $_SESSION['password'] = $_REQUEST['password'];
+
     header("Location: index.php");
 }
+
+file_put_contents('error.log', json_encode($_REQUEST));

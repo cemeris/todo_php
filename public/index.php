@@ -12,14 +12,22 @@ if (isset($_SESSION['username'], $_SESSION['password']) &&
     $_SESSION['username'] === 'cemeris' &&
     $_SESSION['password'] === '123'
 ) {
-    if (isset($_GET['page']) && $_GET['page'] === "logout") {
-        $page_name = "logout";
+    if (isset($_GET['page'])) {
+        if ($_GET['page'] === "logout") {
+            include "../bootcamp_app/actions/logout.php";
+        }
+        elseif ($_GET['page'] === "contacts") {
+            $page_name = "contacts";
+        }
+        else {
+            $page_name = "page404";
+        }
     }
     else {
         $page_name = "todo";
     }
 }
-elseif (isset($_GET['page']) && $_GET['page'] === "autheticate") {
+elseif (isset($_GET['page']) && $_GET['page'] === "authenticate") {
     include "../bootcamp_app/actions/authenticate.php";
 }
 else {
