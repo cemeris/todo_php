@@ -19,14 +19,21 @@ else {
 
 
 function update($todos) {
-    $file_name = 'json_database';
+    $file_name = 'json_database.json';
     file_put_contents($file_name, json_encode($todos));
+    return json_encode([
+        'status' => 'success',
+        'message' => 'data saved'
+    ]);
 }
 
 function get() {
-    $file_name = 'json_database';
+    $file_name = 'json_database.json';
     if (file_exists($file_name)) {
-        return json_decode(file_get_contents($file_name));
+        return json_encode([
+            'status' => 'success',
+            'data' => file_get_contents($file_name)
+        ]);
     }
     return error('DB file does not exist');
 }
