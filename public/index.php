@@ -25,6 +25,9 @@ if (isset($_SESSION['username'], $_SESSION['password']) &&
         elseif ($_GET['page'] === "contacts") {
             $page_name = "contacts";
         }
+        elseif ($_GET['page'] === "request") {
+            $page_name = "request";
+        }
         else {
             $page_name = "page404";
         }
