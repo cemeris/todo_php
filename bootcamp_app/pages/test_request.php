@@ -1,4 +1,4 @@
-<form action="<?php get_url("?page=request") ?>" method="get" >
+<form action="<?php get_url("?page=request") ?>" method="post" >
     <input type="text" name="todos">
     <select name="action">
         <option value="get">Dabūt datus</option>
