@@ -1,3 +1,5 @@
+<?php include "../bootcamp_app/components/head.php"; ?>
+<title>Uzdevumu saraksts - test request</title>
 <form action="<?php get_url("?page=request") ?>" method="post" >
     <input type="text" name="todos">
     <select name="action">
