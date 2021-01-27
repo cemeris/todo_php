@@ -16,6 +16,14 @@
 <script>
     document.getElementById('test-request').addEventListener('submit', function(e) {
         e.preventDefault();
-        console.log(this);
+        let form = this;
+        
+        $.ajax({
+            method: form.getAttribute('method'),
+            url: form.getAttribute('action'),
+            data: $(form).serialize()
+        }).done(function (msg) {
+            console.log(msg);
+        });
     });
 </script>
