@@ -107,6 +107,18 @@ const TaskList = function (container, callback) {
 
 let todo = new TaskList(".task-list", function (task_list) {
   localStorage.setItem("tasks", JSON.stringify(task_list));
+
+  $.ajax({
+    method: 'post',
+    url: action,
+    data: {
+      action: 'update',
+      todos: task_list
+    }
+  }).done(function (msg) {
+      console.log(msg);
+  });
+
 });
 
 document
