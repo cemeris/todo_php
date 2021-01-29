@@ -1,4 +1,5 @@
 /** @format */
+'use strict';
 
 const TaskList = function (container, callback) {
   this.template = document.querySelector(".template");
@@ -132,12 +133,26 @@ document
     textarea.value = "";
   });
 
-let tasks = JSON.parse(localStorage.getItem("tasks"));
 
-if (!tasks) {
-  tasks = {};
-}
+$.ajax({
+  method: 'post',
+  url: action,
+  data: {
+    action: 'get'
+  }
+}).done(function (result) {
 
-for (let i = 0; i < tasks.length; i++) {
-  todo.addTask(tasks[i].text, tasks[i].status);
-}
+  if (result.status === "success") {
+    let tasks = JSON.parse(result.data);
+
+    if (!tasks) {
+      tasks = {};
+    }
+    
+    for (let i = 0; i < tasks.length; i++) {
+      todo.addTask(tasks[i].text, tasks[i].status);
+    }
+  }
+});
+
+
