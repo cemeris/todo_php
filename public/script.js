@@ -36,7 +36,10 @@ const TaskList = function (container, callback) {
     task.querySelector(".edit").addEventListener("click", startEdit.bind(task));
     task
       .querySelector(".save")
-      .addEventListener("click", saveChanges.bind(task));
+      .addEventListener("click", saveChanges.bind({
+        element: task,
+        tasks_object: this.tasks,
+      }));
     //window.addEventListener("click", toggleOptions.bind(false));
     task.classList.remove("template");
     if (status) {
@@ -99,11 +102,15 @@ const TaskList = function (container, callback) {
 
   const saveChanges = function (event) {
     event.stopPropagation();
-    this.classList.remove("editable");
-    if (this.querySelector("pre").textContent === "") {
-      this.remove();
+    let order = this.element.getAttribute("data-order");
+    this.tasks_object[order].text = this.element.querySelector('pre').textContent;
+
+    this.element.classList.remove("editable");
+    if (this.element.querySelector("pre").textContent === "") {
+      this.element.remove();
     }
-    this.querySelector("pre").removeAttribute("contenteditable");
+    this.element.querySelector("pre").removeAttribute("contenteditable");
+    callback(this.tasks_object)
   };
 };
 
