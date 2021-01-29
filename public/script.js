@@ -54,7 +54,8 @@ const TaskList = function (container, callback) {
       this.element.classList.toggle("done");
 
       let order = this.element.getAttribute("data-order");
-      this.tasks_object[order].status = this.element.classList.contains("done");
+      let status = this.element.classList.contains("done");
+      this.tasks_object[order].status = status ? 1 : "";
 
       callback(this.tasks_object);
     }
@@ -128,7 +129,7 @@ document
     event.preventDefault();
     let textarea = this.querySelector("textarea");
     if (textarea.value !== "") {
-      todo.addTask(textarea.value, false);
+      todo.addTask(textarea.value, '');
     }
     textarea.value = "";
   });
