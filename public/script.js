@@ -4,11 +4,11 @@
 const TaskList = function (container, callback) {
   this.template = document.querySelector(".template");
   this.tasks = [];
-  let order = -1;
+  this.order = -1;
 
   this.addTask = function (text, status) {
     let task = this.template.cloneNode(true);
-    ++order;
+    ++this.order;
     this.tasks.push({
       text: text,
       status: status,
@@ -46,7 +46,7 @@ const TaskList = function (container, callback) {
       task.classList.add("done");
     }
     task.querySelector("pre").textContent = text;
-    task.setAttribute("data-order", order);
+    task.setAttribute("data-order", this.order);
     document.querySelector(container).append(task);
   };
 
@@ -143,9 +143,9 @@ document
 
 localStorage.setItem("tasks", "");
 
-setInterval(function () {
+let listen = setInterval(function () {
   $.ajax({
-    method: 'post',
+    method: 'get',
     url: action,
     data: {
       action: 'get'
@@ -164,10 +164,26 @@ setInterval(function () {
         }
 
         console.log(true);
-        document.querySelector(".task-list").innerHTML = '';
-        todo.tasks = [];
+ 
+        todo = new TaskList(".task-list", saveTask);
+        let task_list = document.querySelector(".task-list");
+
+        let todo_elements = task_list.querySelectorAll('[data-order]');
+
+        for (let i = 0; i < todo_elements.length; i++) {
+          if (!todo_elements[i].classList.contains('editable')) {
+            todo_elements[i].remove();
+          }
+        }
+
+
         for (let i = 0; i < tasks.length; i++) {
-          todo.addTask(tasks[i].text, tasks[i].status);
+          if (todo_elements[i] === undefined || !todo_elements[i].classList.contains('editable')) {
+            todo.addTask(tasks[i].text, tasks[i].status);
+          }
+          else {
+            todo.order++;
+          }
         }
       }
     }

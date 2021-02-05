@@ -1,7 +1,7 @@
 <?php include "../bootcamp_app/components/head.php"; ?>
 <title>Uzdevumu saraksts - login</title>
 
-<form action="?page=authenticate&sid=<?php echo $sid;?>" method="post">
+<form action="<?php get_url('?page=authenticate&sid=' . $sid)?>" method="post">
     <label>Lietotajs</label>
     <input type="text" name="username">
     <label>Parole</label>
