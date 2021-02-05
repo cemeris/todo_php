@@ -70,7 +70,6 @@ const TaskList = function (container, callback) {
       options = document.querySelector(".options.active");
     }
     if (options) {
-      console.log(options);
       options.classList.toggle("active");
     }
   };
@@ -153,17 +152,13 @@ let listen = setInterval(function () {
   }).done(function (result) {
     if (result.status === "success") {
       let data = localStorage.getItem("tasks");
-      if (data === result.data) {
-        console.log(false);
-      }
-      else {
+      if (data !== result.data) {
         localStorage.setItem("tasks", result.data);
         let tasks = JSON.parse(result.data);
         if (!tasks) {
           tasks = [];
         }
 
-        console.log(true);
  
         todo = new TaskList(".task-list", saveTask);
         let task_list = document.querySelector(".task-list");
@@ -182,6 +177,8 @@ let listen = setInterval(function () {
             todo.addTask(tasks[i].text, tasks[i].status);
           }
           else {
+            document.querySelector(".task-list")
+            .append(document.querySelector('.editable'));
             todo.order++;
           }
         }
