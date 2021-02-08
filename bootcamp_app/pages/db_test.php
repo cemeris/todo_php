@@ -11,20 +11,35 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-echo "Db connected";
+getData($conn);
+//setData($conn);
 
-
-$sql = "SELECT id, model, color FROM cars";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-  // output data of each row
-  while($row = $result->fetch_assoc()) {
-    echo "id: " . $row["id"]. " - Name: " . $row["model"]. " " . $row["color"]. "<br>";
+function getData($conn) {
+  $sql = "SELECT id, model, color FROM cars";
+  $result = $conn->query($sql);
+  
+  if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+      echo "id: " . $row["id"]. " - Name: " . $row["model"]. " " . $row["color"]. "<br>";
+    }
+  } else {
+    echo "0 results";
   }
-} else {
-  echo "0 results";
 }
+
+function setData($conn) {
+  $sql = "INSERT INTO cars (model, color) VALUES ('volkswagen', 'green')";
+  $result = $conn->query($sql);
+
+  if ($result === true) {
+    echo "ieraksts pievienots";
+  }
+  else {
+    echo "neizdevās";
+  }
+}
+
+
 $conn->close();
 
 ?>
