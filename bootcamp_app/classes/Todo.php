@@ -28,7 +28,7 @@ class Todo {
         if ($result) {
           if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-              echo "id: " . $row["id"]. " - Task: " . $row["text"]. " " . $row["status"]. "<br>";
+              print_r($row);
             }
           } else {
             echo "0 results";
@@ -43,7 +43,8 @@ class Todo {
       $text = "This is my task";
       $status = true;
       $d = new DateTime();
-      $createAt = "2021-02-09 20:50:57";
+      $d->setTimezone(new DateTimeZone('Europe/Riga'));
+      $createAt =  $d->format("Y-m-d H:m:s");
       $modifiedAt = $d->format("Y-m-d H:m:s");
 
         $sql = "INSERT INTO `todo-tasks` (`text`, `status`, `createdAt`, `modifiedAt`) VALUES ('$text', '$status', '$createAt', '$modifiedAt')";
