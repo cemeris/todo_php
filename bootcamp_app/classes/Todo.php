@@ -1,6 +1,6 @@
 <?php
 
-class Cars {
+class Todo {
     private $conn;
 
     public function __construct() {
@@ -22,26 +22,35 @@ class Cars {
     }
 
     public function getData() {
-        $sql = "SELECT id, model, color FROM cars";
+        $sql = "SELECT * FROM `todo-tasks`";
         $result = $this->conn->query($sql);
         
         if ($result) {
-            if ($result && $result->num_rows > 0) {
+          if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo "id: " . $row["id"]. " - Name: " . $row["model"]. " " . $row["color"]. "<br>";
+              echo "id: " . $row["id"]. " - Task: " . $row["text"]. " " . $row["status"]. "<br>";
             }
-            } else {
+          } else {
             echo "0 results";
-            }
+          }
         }
         else {
-            echo "Result is wrong";
+          echo "Result is wrong";
         }
       }
       
     public function setData() {
-        $sql = "INSERT INTO cars (model, color) VALUES ('volkswagen', 'green')";
+      $text = "This is my task";
+      $status = true;
+      $d = new DateTime();
+      $createAt = "2021-02-09 20:50:57";
+      $modifiedAt = $d->format("Y-m-d H:m:s");
+
+        $sql = "INSERT INTO `todo-tasks` (`text`, `status`, `createdAt`, `modifiedAt`) VALUES ('$text', '$status', '$createAt', '$modifiedAt')";
         $result = $this->conn->query($sql);
+        if ($this->conn->error) {
+          die("Query request error: " . $this->conn->error);
+        }
       
         if ($result === true) {
           echo "ieraksts pievienots";
