@@ -2,6 +2,7 @@
 class DB {
     protected $conn;
     protected $table;
+    public $last_message = '';
 
     public function __construct($table_name) {
 
@@ -30,14 +31,14 @@ class DB {
         if ($result) {
           if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-              echo json_encode($row) . "<br>";
+              $this->last_message = json_encode($row) . "<br>";
             }
           } else {
-            echo "0 results";
+            $this->last_message = "0 results";
           }
         }
         else {
-          echo "Result is wrong";
+          $this->last_message = "Result is wrong";
         }
     }
 
@@ -60,10 +61,10 @@ class DB {
       $result = $this->conn->query($sql);
     
       if ($result === true) {
-        echo "ieraksts pievienots";
+        $this->last_message = "ieraksts pievienots";
       }
       else {
-        echo "neizdevās";
+        $this->last_message = $sql. "neizdevās inserts";
       }
     }
 
@@ -79,14 +80,13 @@ class DB {
       }
 
       $sql = "UPDATE `$this->table` SET $set_values WHERE id=$id";
-      echo $sql . "<br>";
       $result = $this->conn->query($sql);
     
       if ($result === true) {
-        echo "ieraksts izmainīts";
+        $this->last_message = "ieraksts izmainīts";
       }
       else {
-        echo "neizdevās";
+        $this->last_message = "neizdevās updates";
       }
     }
 
