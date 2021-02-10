@@ -11,6 +11,11 @@ class Todo extends DB {
       $createdAt =  $d->format("Y-m-d H:m:s");
       $modifiedAt = $d->format("Y-m-d H:m:s");
 
-      $this->set("`text`, `status`, `createdAt`, `modifiedAt`", "'$text', '$status', '$createdAt', '$modifiedAt'");
+      $this->set([
+        'text' => $text,
+        'status' => $status,
+        'createdAt' => $createdAt,
+        'modifiedAt' => $modifiedAt
+      ]);
     }
 }

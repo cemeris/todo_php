@@ -41,7 +41,21 @@ class DB {
         }
     }
 
-    public function set($columns, $values) {
+    public function set($entries) {
+      $columns = '';
+      $values = '';
+      $i = 0;
+      foreach ($entries as $key => $value) {
+        $columns .= "`$key`";
+        $values .= "'$value'";
+        $i++;
+        if (count($entries) > $i) {
+          $columns .= ", ";
+          $values .= ", ";
+        }
+      }
+
+
       $sql = "INSERT INTO `$this->table` ($columns) VALUES ($values)";
       $result = $this->conn->query($sql);
     
