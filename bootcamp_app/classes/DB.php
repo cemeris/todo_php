@@ -54,7 +54,18 @@ class DB {
     }
 
     public function update($id, $values) {
-      $sql = "UPDATE `$this->table` SET $values WHERE id=$id";
+      $set_values = '';
+      $i = 0;
+      foreach ($values as $key => $value) {
+        $i = $i + 1;
+        $set_values = $set_values . $key . "=" . "'$value'";
+        if (count($values) > $i) {
+          $set_values = $set_values . ", ";
+        }
+      }
+
+      $sql = "UPDATE `$this->table` SET $set_values WHERE id=$id";
+      echo $sql . "<br>";
       $result = $this->conn->query($sql);
     
       if ($result === true) {

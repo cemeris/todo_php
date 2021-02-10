@@ -5,7 +5,7 @@ include "../bootcamp_app/classes/Todo.php";
 
 $cars = new Cars('cars');
 //$cars->setData();
-$cars->update(2, "color='white'");
+$cars->update(2, ['color' => 'orange', 'model' => "shkoda"]);
 $cars->get();
 
 $todo = new Todo('todo-tasks');
