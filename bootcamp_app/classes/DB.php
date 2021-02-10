@@ -4,6 +4,7 @@ class DB {
     protected $table;
 
     public function __construct($table_name) {
+
         $this->table = $table_name;
         $servername = "localhost";
         $username = "root";
@@ -50,5 +51,21 @@ class DB {
       else {
         echo "neizdevās";
       }
+    }
+
+    public function update($id, $values) {
+      $sql = "UPDATE `$this->table` SET $values WHERE id=$id";
+      $result = $this->conn->query($sql);
+    
+      if ($result === true) {
+        echo "ieraksts izmainīts";
+      }
+      else {
+        echo "neizdevās";
+      }
+    }
+
+    public function delete() {
+
     }
 }
